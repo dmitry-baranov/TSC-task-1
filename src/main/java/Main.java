@@ -1,22 +1,16 @@
+import data.Department;
 import data.Employee;
 import logic.DivisionByDepartment;
 import uInteraction.ReadWriteFile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     private static ReadWriteFile readWriteFile = new ReadWriteFile();
 
-    private static DivisionByDepartment divisionByDepartment = new DivisionByDepartment();
-
-    private static List<Employee> employees = new ArrayList<>();
-
     public static void main(String[] args) {
-        readWriteFile.readFile(employees);
-        divisionByDepartment.toTheDepartment(employees, divisionByDepartment.searchDepartments(employees));
-        readWriteFile.writeFile(employees);
+        readWriteFile.start();
 
     }
 }

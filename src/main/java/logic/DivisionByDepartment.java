@@ -1,20 +1,25 @@
 package logic;
 
+import data.Department;
 import data.Employee;
 
 import java.util.*;
 
 public class DivisionByDepartment {
 
-//    private int avgSalary(List<Employee> employees, String department) {
-//        int sumSalary = 0;
-//        for (Employee e : employees) {
-//            if (e.getDepartment().equals(department)) {
-//                sumSalary += e.getSalary();
-//            }
-//        }
-//        return (sumSalary / (employees.size()));
-//    }
+//    private Map<String, Integer> departments = new HashMap<>();
+
+    public void start(List<Department> departments) {
+        toTheDepartment(departments);
+    }
+
+    public int avgSalary(List<Employee> employees) {
+        int sumSalary = 0;
+        for (Employee employee : employees) {
+                sumSalary += employee.getSalary();
+        }
+        return (sumSalary / (employees.size()));
+    }
 
     public Map<String, Integer> searchDepartments(List<Employee> employees) {
 
@@ -24,7 +29,6 @@ public class DivisionByDepartment {
 //        }
 //        return set;
 
-        Map<String, Integer> departments = new HashMap<>();
         for (Employee e : employees) {
             departments.put(e.getDepartment(), departments.get(e.getDepartment()) == null ? e.getSalary() : departments.get(e.getDepartment()) + e.getSalary());
         }
@@ -52,4 +56,24 @@ public class DivisionByDepartment {
 
         }
     }
+
+    public void toTheDepartment(List<Department> departments) {
+        for (Department department : departments) {
+
+        }
+
+    }
+
+    public List<Department> recursion(Department department, Department departmentToThe, List<Department> departments) {
+
+    }
+
+    private void writeList(String department, List<Employee> employees) {
+        List<List<Employee>> listsEmployee = combinationEmployee.get(department);
+        for (Employee e : newList) {
+            newList.
+        }
+
+    }
+
 }
