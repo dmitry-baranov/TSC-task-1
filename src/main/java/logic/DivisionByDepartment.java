@@ -4,8 +4,8 @@ import data.Employee;
 
 import java.util.*;
 
-public class Util {
-    private static int avgSalary(List<Employee> employees, String department) {
+public class DivisionByDepartment {
+    private int avgSalary(List<Employee> employees, String department) {
         int sumSalary = 0;
         for (Employee e : employees) {
             if (e.getDepartment().equals(department)) {
@@ -15,7 +15,7 @@ public class Util {
         return (sumSalary / (employees.size()));
     }
 
-    public static Map<String, Integer> allDepartments(List<Employee> employees) {
+    public Map<String, Integer> allDepartments(List<Employee> employees) {
 //        Set<String> set = new HashSet<>();
 //        for (Employee e : employees) {
 //            set.add(e.getDepartment());
@@ -37,7 +37,7 @@ public class Util {
         return departments;
     }
 
-    public static void toTheDepartment(List<Employee> listEmployees, Map<String, Integer> mapDepartments) {
+    public void toTheDepartment(List<Employee> listEmployees, Map<String, Integer> mapDepartments) {
         for (Employee employee : listEmployees) {
             if (employee.getSalary() < mapDepartments.get(employee.getDepartment())) {
                 for (Map.Entry<String, Integer> department : mapDepartments.entrySet()) {
