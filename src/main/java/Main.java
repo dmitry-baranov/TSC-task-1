@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         readWriteFile.readFile(employees);
-        divisionByDepartment.toTheDepartment(employees, divisionByDepartment.allDepartments(employees));
+        divisionByDepartment.toTheDepartment(employees, divisionByDepartment.searchDepartments(employees));
         readWriteFile.writeFile(employees);
 
     }

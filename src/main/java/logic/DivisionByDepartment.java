@@ -5,22 +5,25 @@ import data.Employee;
 import java.util.*;
 
 public class DivisionByDepartment {
-    private int avgSalary(List<Employee> employees, String department) {
-        int sumSalary = 0;
-        for (Employee e : employees) {
-            if (e.getDepartment().equals(department)) {
-                sumSalary += e.getSalary();
-            }
-        }
-        return (sumSalary / (employees.size()));
-    }
 
-    public Map<String, Integer> allDepartments(List<Employee> employees) {
+//    private int avgSalary(List<Employee> employees, String department) {
+//        int sumSalary = 0;
+//        for (Employee e : employees) {
+//            if (e.getDepartment().equals(department)) {
+//                sumSalary += e.getSalary();
+//            }
+//        }
+//        return (sumSalary / (employees.size()));
+//    }
+
+    public Map<String, Integer> searchDepartments(List<Employee> employees) {
+
 //        Set<String> set = new HashSet<>();
 //        for (Employee e : employees) {
 //            set.add(e.getDepartment());
 //        }
 //        return set;
+
         Map<String, Integer> departments = new HashMap<>();
         for (Employee e : employees) {
             departments.put(e.getDepartment(), departments.get(e.getDepartment()) == null ? e.getSalary() : departments.get(e.getDepartment()) + e.getSalary());
@@ -32,7 +35,7 @@ public class DivisionByDepartment {
                     i++;
                 }
             }
-            departments.put(department.getKey(),(Integer) department.getValue() / i);
+            departments.put(department.getKey(), department.getValue() / i);
         }
         return departments;
     }
