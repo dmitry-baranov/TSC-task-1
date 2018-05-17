@@ -7,9 +7,8 @@ import java.util.*;
 
 public class Main {
 
-    private static ReadWriteFile readWriteFile = new ReadWriteFile();
-
     public static void main(String[] args) {
+        ReadWriteFile readWriteFile = new ReadWriteFile();
         readWriteFile.start();
 
     }
