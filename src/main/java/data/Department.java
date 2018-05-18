@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Department {
+public class Department implements Comparable<Department>{
 
     String departmentName;
     List<Employee> employeeList = new ArrayList<>();
@@ -48,4 +48,8 @@ public class Department {
         return other instanceof Department;
     }
 
+    @Override
+    public int compareTo(Department o) {
+        return departmentName.compareTo(o.departmentName);
+    }
 }

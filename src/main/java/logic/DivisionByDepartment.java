@@ -12,6 +12,7 @@ public class DivisionByDepartment {
     //    private Map<String, Integer> departments = new HashMap<>();
 
     Map<Integer, List<Employee>> resultMap = new HashMap<>();
+    private List<List<Employee>> combinationList = new ArrayList<>();
 
 //    public Map<String, Integer> searchDepartments(List<Employee> employees) {
 //
@@ -50,25 +51,30 @@ public class DivisionByDepartment {
 //    }
 
 
-    public void toTheDepartment(List<Employee> employees, int ofAvgSalary, int toTheAvgSalary, int n, int sumSalary, int j) {
+    public void toTheDepartment(List<Employee> employees, int ofAvgSalary, int toTheAvgSalary, int n, int sumSalary, int j, List<Employee> combinationList) {
         int thisSumSalary = 0;
-        if (employees.size() == 1 ) {
+        if (employees.size() == 1) {
             return;
-        } else if (thisSumSalary / (n+1) > toTheAvgSalary) {
+        } else if (thisSumSalary / (n + 1) > toTheAvgSalary) {
             return;
         } else {
             for (int i = n; i < employees.size(); i++) {
                 thisSumSalary = sumSalary + employees.get(i).getSalary();
-                if (((thisSumSalary /(n+1)) < ofAvgSalary) & ( (thisSumSalary /(n+1)) > toTheAvgSalary)) {
-                    if (!resultMap.containsKey(j)) {
-                        resultMap.put(j, new ArrayList<>());
-                    }
-                    resultMap.get(j).add(employees.get(i));
+                List<Employee> cloneList = new ArrayList<>(combinationList);
+                if (((thisSumSalary / (n + 1)) < ofAvgSalary) & ((thisSumSalary / (n + 1)) > toTheAvgSalary)) {
+//                    if (!resultMap.containsKey(j)) {
+//                        resultMap.put(j, new ArrayList<>());
+//                    }
+
+//                    List<Employee> cloneList = new ArrayList<>(combinationList);
+                    cloneList.add(employees.get(i));
+                    resultMap.put(resultMap.size() + 1, cloneList);
+//                    resultMap.get(resultMap.size()).add(employees.get(i));
                 }
-                if (employees.size() != n+2) {
+                if (employees.size() != n + 2) {
                     int p = n + 1;
                     int z = j + 1;
-                    toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, p, thisSumSalary, z);
+                    toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, p, thisSumSalary, z, cloneList);
                 }
 
             }
@@ -76,29 +82,43 @@ public class DivisionByDepartment {
         }
     }
 
-    public void toTheDep(List<Employee> employees, int ofAvgSalary, int toTheAvgSalary, int n, int sumSalary, int j) {
-        int thisSumSalary = 0;
-        if (employees.size() == 1 ) {
-            return;
-        } else {
-            for (int i = n; i < employees.size(); i++) {
-                thisSumSalary = sumSalary + employees.get(i).getSalary();
-                if (((thisSumSalary /(n+1)) < ofAvgSalary) & ( (thisSumSalary /(n+1)) > toTheAvgSalary)) {
-                    if (!resultMap.containsKey(j)) {
-                        resultMap.put(j, new ArrayList<>());
-                    }
-                    resultMap.get(j).add(employees.get(i));
-                }
-                if (employees.size() != n+2) {
-                    int p = n + 1;
-                    int z = j + 1;
-                    toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, p, thisSumSalary, z);
-                }
-
-            }
-//            toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, n, thisSumSalary);
+    public List<List<Employee>> combinationUtil(List<Employee> initialList, List<List<Employee>> resultList, int sizeInitial) {
+        if (sizeInitial == 0) {
+            return resultList;
         }
+        List<List<Employee>> dataList = combinationUtil(initialList, resultList, sizeInitial - 1);
+        dataList.add(new ArrayList<>());
+        for (int i = sizeInitial-1; i<initialList.size(); i++) {
+            dataList.get(sizeInitial-1).add(initialList.get(i));
+        }
+        return dataList;
     }
+
+
+
+//    public void toTheDep(List<Employee> employees, int ofAvgSalary, int toTheAvgSalary, int n, int sumSalary, int j) {
+//        int thisSumSalary = 0;
+//        if (employees.size() == 1 ) {
+//            return;
+//        } else {
+//            for (int i = n; i < employees.size(); i++) {
+//                thisSumSalary = sumSalary + employees.get(i).getSalary();
+//                if (((thisSumSalary /(n+1)) < ofAvgSalary) & ( (thisSumSalary /(n+1)) > toTheAvgSalary)) {
+//                    if (!resultMap.containsKey(j)) {
+//                        resultMap.put(j, new ArrayList<>());
+//                    }
+//                    resultMap.get(j).add(employees.get(i));
+//                }
+//                if (employees.size() != n+2) {
+//                    int p = n + 1;
+//                    int z = j + 1;
+//                    toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, p, thisSumSalary, z);
+//                }
+//
+//            }
+////            toTheDepartment(employees, ofAvgSalary, toTheAvgSalary, n, thisSumSalary);
+//        }
+//    }
 
 //    public List<Department> recursion(Department department, Department departmentToThe, List<Department> departments) {
 //
