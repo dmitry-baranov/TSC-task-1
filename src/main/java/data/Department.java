@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Department implements Comparable<Department>{
+public class Department implements Comparable<Department> {
 
     String departmentName;
     List<Employee> employeeList = new ArrayList<>();
@@ -28,7 +28,8 @@ public class Department implements Comparable<Department>{
     public Department(String departmentName) {
         this.departmentName = departmentName;
     }
-//    public boolean equalsNotList(Object o) {
+
+    //    public boolean equalsNotList(Object o) {
 //        if (o == this) {
 //            return true;
 //        } else if (!(o instanceof Department)) {

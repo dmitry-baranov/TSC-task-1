@@ -3,6 +3,7 @@ package uInteraction;
 import data.Department;
 import data.Employee;
 import logic.Util;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +70,8 @@ public class ReadWriteFile {
                             if (Util.comparisonSalary(ofAvgSalary, toTheAvgSalary, listCombination)) {
                                 writer.print("\n");
                                 for (Employee e : listCombination) {
-                                    writer.print(" Name: " + e.getName() + ", Surname: " + e.getSurname() + ", Salary: " + e.getSalary() + ";");
+                                    writer.print(" Name: " + e.getName() + ", Surname: " + e.getSurname() + ", "
+                                            + "Salary: " + e.getSalary() + ";");
                                 }
                             }
                         }
