@@ -5,12 +5,10 @@ import data.Employee;
 import errors.MyException;
 import errors.Response;
 import logic.Util;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class ReadWriteFile {
 
@@ -25,7 +23,7 @@ public class ReadWriteFile {
             readFile();
             writeFile();
         } catch (MyException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getResponse().getErrorCode() + e.getResponse().getErrorMessage());
         }
 
     }
