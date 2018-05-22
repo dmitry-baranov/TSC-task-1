@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class UtilTest extends Assert {
 
     @Before
     public void setEmployeeList() {
-        employeeList.add(new Employee("abv", "abc", 1000));
-        employeeList.add(new Employee("abv1", "abc", 5000));
-        employeeList.add(new Employee("abv2", "abc", 7000));
-        employeeList.add(new Employee("abv3", "abc", 15000));
+        employeeList.add(new Employee("abv", "abc", BigInteger.valueOf(1000)));
+        employeeList.add(new Employee("abv1", "abc", BigInteger.valueOf(5000)));
+        employeeList.add(new Employee("abv2", "abc", BigInteger.valueOf(7000)));
+        employeeList.add(new Employee("abv3", "abc", BigInteger.valueOf(15000)));
     }
 
     @After
@@ -30,7 +31,7 @@ public class UtilTest extends Assert {
 
     @Test
     public void avgSalaryTest() {
-        assertEquals(Util.avgSalary(employeeList), 7000);
+        assertTrue(Util.avgSalary(employeeList).equals(BigInteger.valueOf(7000)));
     }
 
     @Test
@@ -41,9 +42,9 @@ public class UtilTest extends Assert {
     @Test
     public void comparisonSalary() {
 
-        assertTrue(Util.comparisonSalary(10000, 5000, employeeList));
-        assertFalse(Util.comparisonSalary(7000, 5000, employeeList));
-        assertFalse(Util.comparisonSalary(10000, 7000, employeeList));
+        assertTrue(Util.comparisonSalary(BigInteger.valueOf(10000), BigInteger.valueOf(5000), employeeList));
+        assertFalse(Util.comparisonSalary(BigInteger.valueOf(7000), BigInteger.valueOf(5000), employeeList));
+        assertFalse(Util.comparisonSalary(BigInteger.valueOf(10000), BigInteger.valueOf(7000), employeeList));
 
     }
 

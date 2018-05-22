@@ -2,17 +2,18 @@ package logic;
 
 import data.Employee;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Util {
 
-    public static int avgSalary(List<Employee> employees) {
-        int sumSalary = 0;
+    public static BigInteger avgSalary(List<Employee> employees) {
+        BigInteger sumSalary = BigInteger.valueOf(0);
         for (Employee employee : employees) {
-            sumSalary += employee.getSalary();
+            sumSalary = sumSalary.add(employee.getSalary());
         }
-        return (sumSalary / (employees.size()));
+        return sumSalary.divide(BigInteger.valueOf(employees.size()));
     }
 
     public static List<List<Employee>> combination(int n, List<List<Employee>> result, List<Employee> employees) {
@@ -35,7 +36,9 @@ public class Util {
 
     }
 
-    public static boolean comparisonSalary(int ofAvgSalary, int toTheAvgSalary, List<Employee> list) {
-        return (((avgSalary(list)) < ofAvgSalary) & (avgSalary(list) > toTheAvgSalary));
+    public static boolean comparisonSalary(BigInteger fromAvgSalary, BigInteger toTheAvgSalary, List<Employee> list) {
+
+        return ((fromAvgSalary.compareTo(avgSalary(list)) > 0) & (toTheAvgSalary.compareTo(avgSalary(list)) < 0));
+
     }
 }

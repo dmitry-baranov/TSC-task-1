@@ -2,12 +2,15 @@ package uInteraction;
 
 import data.Department;
 import data.Employee;
+import errors.MyException;
+import errors.Response;
 import logic.Util;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReadWriteFile {
 
@@ -15,37 +18,33 @@ public class ReadWriteFile {
 
     private static final String FILENAMEWRITE = "result.txt";
 
-    private List<Department> departments = new ArrayList<>();
-
+    private Map<String, Department> departments = new HashMap<>();
 
     public void start() {
-        readFile();
-        writeFile();
+        try {
+            readFile();
+            writeFile();
+        } catch (MyException e) {
+            System.out.println(e.toString());
+        }
+
     }
 
-    private void readFile() {
+    private void readFile() throws NumberFormatException {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAMEREAD))) {
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] s = sCurrentLine.split(";");
-                boolean flag = false;
-                for (Department d : departments) {
-                    if (d.getDepartmentName().equals(s[2])) {
-                        d.getEmployeeList().add(new Employee(s[0], s[1], Integer.parseInt(s[3])));
-                        flag = true;
-                    }
+                if (!departments.containsKey(s[2])) {
+                    departments.put(s[2], new Department());
                 }
-                if (!flag) {
-                    Department department = new Department(s[2]);
-                    department.getEmployeeList().add(new Employee(s[0], s[1], Integer.parseInt(s[3])));
-                    departments.add(department);
-                }
+                departments.get(s[2]).getEmployeeList().add(new Employee(s[0], s[1], new BigInteger(s[3])));
             }
-
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new MyException(Response.FILE_NOT_FOUND);
+        } catch (NumberFormatException e) {
+            throw new MyException(Response.INVALID_INPUT_DATA);
         }
-        Collections.sort(departments);
     }
 
     private void writeFile() {
@@ -53,25 +52,25 @@ public class ReadWriteFile {
         try {
             writer = new PrintWriter(FILENAMEWRITE, "UTF-8");
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            System.out.println("Результрующий файл не найден");
         }
-        for (int of = 0; of < departments.size(); of++) {
-            List<Employee> ofList = departments.get(of).getEmployeeList();
-            int ofAvgSalary = Util.avgSalary(ofList);
-            writer.println("Of department " + departments.get(of).getDepartmentName());
-            for (int toThe = 0; toThe < departments.size(); toThe++) {
-                if (of != toThe) {
-                    List<Employee> toTheList = departments.get(toThe).getEmployeeList();
-                    int toTheAvgSalary = Util.avgSalary(toTheList);
-                    writer.print("\nTo the department " + departments.get(toThe).getDepartmentName() + ":");
-                    List<List<Employee>> result = Util.combination(ofList.size() - 1, new ArrayList<>(), ofList);
+        for (Map.Entry<String, Department> departmentEntryFrom : departments.entrySet()) {
+            List<Employee> fromList = departmentEntryFrom.getValue().getEmployeeList();
+            BigInteger ofAvgSalary = Util.avgSalary(fromList);
+            writer.println("From department " + departmentEntryFrom.getKey());
+            for (Map.Entry<String, Department> departmentEntryTo : departments.entrySet()) {
+                if (!departmentEntryFrom.getKey().equals(departmentEntryTo.getKey())) {
+                    List<Employee> toTheList = departmentEntryTo.getValue().getEmployeeList();
+                    BigInteger toTheAvgSalary = Util.avgSalary(toTheList);
+                    writer.print("\nTo the department " + departmentEntryTo.getKey() + ":");
+                    List<List<Employee>> result = Util.combination(fromList.size() - 1, new ArrayList<>(), fromList);
                     if (result.size() != 0) {
                         for (List<Employee> listCombination : result) {
                             if (Util.comparisonSalary(ofAvgSalary, toTheAvgSalary, listCombination)) {
                                 writer.print("\n");
                                 for (Employee e : listCombination) {
                                     writer.print(" Name: " + e.getName() + ", Surname: " + e.getSurname() + ", "
-                                            + "Salary: " + e.getSalary() + ";");
+                                            + "Salary: " + e.getSalary().toString() + ";");
                                 }
                             }
                         }

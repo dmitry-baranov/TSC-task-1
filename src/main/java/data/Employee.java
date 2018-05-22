@@ -1,12 +1,14 @@
 package data;
 
+import java.math.BigInteger;
+
 public class Employee {
 
     private String name;
     private String surname;
-    private int salary;
+    private BigInteger salary;
 
-    public Employee(String name, String surname, int salary) {
+    public Employee(String name, String surname, BigInteger salary) {
         this.name = name;
         this.surname = surname;
         this.salary = salary;
@@ -20,7 +22,7 @@ public class Employee {
         return surname;
     }
 
-    public int getSalary() {
+    public BigInteger getSalary() {
         return salary;
     }
 
@@ -32,7 +34,7 @@ public class Employee {
         this.surname = surname;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(BigInteger salary) {
         this.salary = salary;
     }
 
