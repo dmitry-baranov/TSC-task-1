@@ -35,7 +35,6 @@ public class UtilTest extends Assert {
 
     @Test
     public void combination() {
-
         assertEquals(Util.combination(employeeList.size() - 1, new ArrayList<>(), employeeList).size(), 15);
     }
 
@@ -44,6 +43,7 @@ public class UtilTest extends Assert {
 
         assertTrue(Util.comparisonSalary(10000, 5000, employeeList));
         assertFalse(Util.comparisonSalary(7000, 5000, employeeList));
+        assertFalse(Util.comparisonSalary(10000, 7000, employeeList));
 
     }
 
