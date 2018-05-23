@@ -1,4 +1,4 @@
-aba;abv;2;100dsfw
+aba;abv;2;100
 abb;abv;3;600
 abc;abv;3;700
 abd;abv;4;500
