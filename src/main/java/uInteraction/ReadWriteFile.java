@@ -21,6 +21,7 @@ public class ReadWriteFile {
 
     public void start() {
         try {
+            Integer i = Integer.valueOf("3");
             readFile();
             writeFile();
         } catch (MyException e) {
