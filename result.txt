@@ -1,7 +1,7 @@
 Из отдела 1
 
 В отдел 2:
- Name: abg, Surname: abv, Salary: 200;
+ Name: abg, Surname: abv, Salary: 210;
 В отдел 3:
 В отдел 4:
 В отдел 5:

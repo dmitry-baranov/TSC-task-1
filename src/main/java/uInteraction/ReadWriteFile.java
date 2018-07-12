@@ -13,11 +13,16 @@ import java.util.*;
 
 public class ReadWriteFile {
 
-    private static final String FILENAMEREAD = "text.txt";
+    private String FILENAMEREAD;
 
-    private static final String FILENAMEWRITE = "result.txt";
+    private String FILENAMEWRITE;
 
     private Map<String, Department> departments = new HashMap<>();
+
+    public ReadWriteFile(String FILENAMEREAD, String FILENAMEWRITE) {
+        this.FILENAMEREAD = FILENAMEREAD;
+        this.FILENAMEWRITE = FILENAMEWRITE;
+    }
 
     public void start() {
         try {
